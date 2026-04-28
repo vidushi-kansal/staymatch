@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StayMatch | Neural Sync</title>
+    <link rel="stylesheet" href="matching.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="matching.js" defer></script>
+</head>
+
+<body>
+
+<div class="glass-shell">
+
+<header class="matching-header">
+
+<div class="back-link" onclick="window.location.href='dashboard.html'">
+← Dashboard
+</div>
+
+<h1>Neural Compatibility <span>Sync</span></h1>
+
+<p>Tune your lifestyle frequencies to find your perfect match.</p>
+
+</header>
+
+
+<div class="main-layout">
+
+<!-- LEFT SIDE CONTROLS -->
+
+<section class="controls">
+
+<div class="input-card">
+
+<div class="trait">
+<label>Sleep Schedule <span id="val-sleep">5</span></label>
+<input type="range" id="sleep" min="1" max="10" value="5" oninput="updateVal('sleep')">
+</div>
+
+<div class="trait">
+<label>Cleanliness <span id="val-clean">5</span></label>
+<input type="range" id="clean" min="1" max="10" value="5" oninput="updateVal('clean')">
+</div>
+
+<div class="trait">
+<label>Noise Tolerance <span id="val-noise">5</span></label>
+<input type="range" id="noise" min="1" max="10" value="5" oninput="updateVal('noise')">
+</div>
+
+<div class="trait">
+<label>Study Habits <span id="val-study">5</span></label>
+<input type="range" id="study" min="1" max="10" value="5" oninput="updateVal('study')">
+</div>
+
+<div class="trait">
+<label>Social Behavior <span id="val-social">5</span></label>
+<input type="range" id="social" min="1" max="10" value="5" oninput="updateVal('social')">
+</div>
+
+
+<!-- Smoking -->
+
+<div class="trait">
+<label>Smoking Preference</label>
+
+<select id="smoking">
+<option value="0">Non-Smoker</option>
+<option value="1">Smoker</option>
+</select>
+
+</div>
+
+
+<!-- Pet Friendly -->
+
+<div class="trait">
+<label>Pet Friendly Preference</label>
+
+<select id="pets">
+<option value="1">Pet Friendly</option>
+<option value="0">No Pets</option>
+</select>
+
+</div>
+
+
+<button type="button" class="sync-btn" onclick="findMatches()">
+Initialize Sync
+</button>
+
+</div>
+
+</section>
+
+<div id="chartModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#1a1a2e; padding:20px; border-radius:15px; border:1px solid #4e44ce; z-index:1000; width:90%; max-width:500px;">
+    <h3 id="modalName" style="color:#080202; text-align:center;"></h3>
+    <canvas id="compatibilityChart"></canvas>
+    <button onclick="document.getElementById('chartModal').style.display='none'" style="margin-top:10px; width:100%; padding:10px; cursor:pointer;">Close</button>
+</div>
+
+<!-- RIGHT SIDE RESULTS -->
+
+<section class="results-area">
+
+<h2>Optimal Matches</h2>
+
+<div id="results" class="results-grid">
+
+<div class="placeholder-msg">
+Adjust your preferences and click <b>Initialize Sync</b> to find compatible roommates.
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+
+</body>
+</html>

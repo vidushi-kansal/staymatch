@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agreement Architect | StayMatch</title>
+    <link rel="stylesheet" href="agreement.css">
+</head>
+<body>
+
+    <div class="left-pane">
+        <header class="header-section">
+            <div class="back-link" onclick="window.location.href='dashboard.html'">← Dashboard</div>
+            <h1>Agreement <span>Architect</span> 🧠</h1>
+            <p class="subtitle">Neural Contract Synthesis Engine</p>
+        </header>
+
+        <div class="scroll-content">
+            <div class="transparent-block">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Primary Resident</label>
+                        <input id="name1" placeholder="Your Full Name">
+                    </div>
+                    <div class="input-group">
+                        <label>Roommate Candidate</label>
+                        <input id="name2" placeholder="Roommate Full Name">
+                    </div>
+                    <div class="input-group full-width">
+                        <label>Total Monthly Rent ($)</label>
+                        <input id="rent" type="number" placeholder="e.g. 1200">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Sleep Cycle (1-10)</label>
+                        <input id="sleep" type="number" min="1" max="10">
+                    </div>
+                    <div class="input-group">
+                        <label>Cleanliness (1-10)</label>
+                        <input id="clean" type="number" min="1" max="10">
+                    </div>
+                    
+                    <div class="input-group full-width">
+                        <label>Specific House Rules</label>
+                        <textarea id="rules" placeholder="Enter custom rules..."></textarea>
+                    </div>
+                    <div class="input-group full-width">
+                        <label>Chore Distribution Strategy</label>
+                        <textarea id="chores" placeholder="Who does what?"></textarea>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button onclick="prefillData()" class="secondary-btn">⚡ Use My Preferences</button>
+                    <button class="generate-btn" onclick="generateAgreement()">Synthesize Agreement</button>
+                </div>
+            </div>
+
+            <div class="card glass-panel">
+            <h3>AGREEMENT STRENGTH</h3>
+            <div id="strengthText" style="margin-bottom: 10px; font-weight: 600;">Waiting for synthesis...</div>
+            
+            <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
+                <div id="strengthFill" style="width: 0%; height: 100%; transition: 1s ease-in-out; background: #6366f1;"></div>
+            </div>
+
+            <button id="fixBtn" onclick="fixAgreementIssues()" style="display: none; margin-top: 15px;" class="small-btn">
+                ✨ Auto-Fix Conflicts
+            </button>
+        </div>
+
+            <div class="output-section">
+                <div class="terminal-header">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    <span class="terminal-title">Generated_Agreement.log</span>
+                </div>
+                <pre id="output">> Ready for neural data injection...</pre>
+            </div>
+
+            <div class="input-group">
+            <label>Noise Tolerance (1-10)</label>
+            <input id="noise" type="number" min="1" max="10" placeholder="5">
+        </div>
+
+            <button onclick="downloadAgreement()" class="download-btn">
+                <span>📥</span> Download Signed PDF (.txt)
+            </button>
+            
+            <div style="height: 60px;"></div> </div>
+    </div>
+
+    <div class="right-pane"></div>
+
+    <script src="agreement.js"></script>
+</body>
+</html>

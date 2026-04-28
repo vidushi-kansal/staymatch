@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code&display=swap');
+
+:root {
+    --primary: #5c54e5;
+    --accent: #00f2fe;
+    --bg-left: #08091a; 
+    --glass: rgba(255, 255, 255, 0.04); 
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Stops the weird "body scroll" */
+    display: flex;
+    background: var(--bg-left);
+}
+
+/* LEFT SIDE */
+.left-pane {
+    width: 50%;
+    height: 100vh;
+    color: white;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-right: 1px solid var(--border);
+    z-index: 2;
+}
+
+.scroll-content {
+    flex: 1;
+    overflow-y: auto; /* Independent scroll */
+    margin-top: 20px;
+    padding-right: 15px;
+}
+
+/* Custom Scrollbar */
+.scroll-content::-webkit-scrollbar { width: 5px; }
+.scroll-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+/* RIGHT SIDE */
+.right-pane {
+    width: 50%;
+    height: 100vh;
+    background: url('https://image.cnbcfm.com/api/v1/image/106913557-1626790336927-gettyimages-1284022552-jp-5.jpeg?v=1626791608&w=1920&h=1080') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+/* Dark Gradient Fade */
+.right-pane::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, var(--bg-left) 0%, transparent 100%);
+}
+
+/* UI Elements */
+.transparent-block {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin: 0;
+    background: linear-gradient(to right, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.input-row { display: flex; gap: 15px; margin-bottom: 15px; }
+.stat-box { flex: 1; }
+.stat-box label { display: block; font-size: 0.7rem; margin-bottom: 5px; opacity: 0.6; }
+
+input, textarea {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.glow-btn {
+    width: 100%;
+    padding: 18px;
+    margin-top: 15px;
+    background: linear-gradient(135deg, var(--primary), #4834d4);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(92, 84, 229, 0.3);
+}
+
+.chart-container { height: 300px; width: 100%; }
+
+.output-box {
+    font-family: 'Fira Code', monospace;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    color: var(--accent);
+}
+
+.meter-bar { background: #000; height: 10px; border-radius: 10px; overflow: hidden; margin: 10px 0; }
+.fill { height: 100%; background: var(--primary); transition: width 1s ease; }
+
+.export-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 16px;
+    
+    /* Typography Upgrade */
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem; /* Increased font size */
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    
+    /* Aesthetics */
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Hover State: The "Neural" Glow */
+.export-btn:hover {
+    background: rgba(0, 242, 254, 0.1); /* Slight tint of your accent color */
+    color: #00f2fe; /* Your --accent color */
+    border-color: #00f2fe;
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+    transform: translateY(-3px);
+}
+
+.export-btn:active {
+    transform: scale(0.98);
+}
+
+/* Increase terminal font size */
+.output-box {
+    font-size: 1rem !important;
+    line-height: 1.6;
+}
+
+/* Increase input and label text size */
+input, textarea, .stat-box label {
+    font-size: 1.2rem !important;
+}
+
+h1 {
+    font-size: 3.2rem; /* Make the main title more prominent */
+}

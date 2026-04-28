@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StayMatch | Smart Chores</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="smart.css">
+</head>
+<body>
+
+    <div class="left-pane">
+        <header class="header">
+            <div class="back-link" onclick="window.location.href='dashboard.html'" style="cursor:pointer; opacity:0.6; margin-bottom:10px;">← Dashboard</div>
+            <h1>Smart Chore <span>Allocator</span></h1>
+            <p>Neural Task Rotation & Fairness Engine</p>
+        </header>
+
+        <div class="scroll-content">
+            <div class="transparent-block">
+                <div class="input-row">
+                    <input type="text" id="name1" placeholder="User A Name">
+                    <input type="text" id="name2" placeholder="User B Name">
+                </div>
+
+                <textarea id="chores" placeholder="Enter chores (e.g. Dishes, Vacuum, Bathroom, Trash)"></textarea>
+
+                <div class="input-row">
+                    <div class="stat-box" style="flex:1;">
+                        <label style="display:block; font-size:0.75rem; margin-bottom:5px; opacity:0.7;">User A Cleanliness</label>
+                        <input type="number" id="clean1" min="1" max="10" placeholder="1-10">
+                    </div>
+                    <div class="stat-box" style="flex:1;">
+                        <label style="display:block; font-size:0.75rem; margin-bottom:5px; opacity:0.7;">User B Cleanliness</label>
+                        <input type="number" id="clean2" min="1" max="10" placeholder="1-10">
+                    </div>
+                </div>
+
+                <button class="glow-btn" onclick="generateChores()">
+                    ⚡ Generate Smart Schedule
+                </button>
+            </div>
+
+            <div id="dashboard" style="display:none;" class="transparent-block">
+                <div class="fairness-meter">
+                    <span style="font-weight:600; font-size:0.9rem;">Workload Balance</span>
+                    <div class="meter-bar">
+                        <div id="balanceFill" class="fill" style="width: 0%;"></div>
+                    </div>
+                    <small id="balanceText" style="color:var(--accent); font-family:'Fira Code';">Analyzing...</small>
+                </div>
+            </div>
+
+            <div id="chartDashboard" style="display:none;" class="transparent-block">
+                <div class="chart-container" style="position: relative; height:250px;">
+                    <canvas id="choreChart"></canvas>
+                </div>
+            </div>
+
+            <div id="output" class="output-box">
+                <div class="placeholder-text">> Initializing fairness engine... Ready for input.</div>
+            </div>
+
+            <button class="export-btn" onclick="downloadChorePlan()">
+            <span style="font-size: 1.2rem;">📥</span>
+            <span>Download Neural Plan (.txt)</span>
+            </button>
+            
+            <div style="height: 50px;"></div> </div>
+    </div>
+
+    <div class="right-pane"></div>
+
+    <script src="smart.js"></script>
+</body>
+</html>

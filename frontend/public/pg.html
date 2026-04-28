@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StayMatch | PG Finder</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Outfit', sans-serif;
+    background: #0b0c1a;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+/* TABS */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.tabs button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background: #1e1f3a;
+    color: white;
+    cursor: pointer;
+}
+
+.active-tab {
+    background: linear-gradient(90deg,#5c54e5,#00f2fe);
+}
+
+/* SEARCH */
+.search-box {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.search-box input,
+.search-box select {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #1e1f3a;
+    color: white;
+}
+
+.search-box button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(90deg,#5c54e5,#00f2fe);
+    color: white;
+    cursor: pointer;
+}
+
+/* GRID */
+.pg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.pg-card {
+    background: #1b1c35;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.pg-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.pg-info {
+    padding: 15px;
+}
+
+/* ADD PG */
+.owner-panel {
+    max-width: 400px;
+    margin: auto;
+    background: #15162b;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.owner-panel input {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #1e1f3a;
+    color: white;
+}
+
+.owner-panel button {
+    margin-top: 10px;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg,#ff7b00,#ff0057);
+    color: white;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- TABS -->
+<div class="tabs">
+    <button onclick="showTab('find')" class="active-tab" id="findBtn">🔍 Find PG</button>
+    <button onclick="showTab('add')" id="addBtn">➕ List Your PG</button>
+</div>
+
+<!-- FIND -->
+<div id="findSection">
+
+    <h1>🏠 Find Your Perfect PG</h1>
+
+    <div class="search-box">
+        <select id="city">
+            <option value="">Select City</option>
+            <option>Delhi</option>
+            <option>Dehradun</option>
+            <option>Pune</option>
+        </select>
+
+        <input type="text" id="location" placeholder="Location">
+        <input type="number" id="price" placeholder="Max Price">
+
+        <button onclick="searchPG()">Search</button>
+    </div>
+
+    <div id="pgResults" class="pg-grid"></div>
+
+</div>
+
+<!-- ADD -->
+<div id="addSection" style="display:none">
+
+    <h1>🏢 List Your PG</h1>
+
+    <div class="owner-panel">
+        <input id="pgName" placeholder="PG Name">
+        <input id="pgCity" placeholder="City">
+        <input id="pgLocation" placeholder="Location">
+        <input id="pgPrice" placeholder="Price">
+        <input id="pgContact" placeholder="Contact">
+        <input id="pgImage" placeholder="Image URL">
+
+        <button onclick="addPG()">Add PG</button>
+    </div>
+
+</div>
+
+<!-- ✅ SCRIPT AT BOTTOM (IMPORTANT) -->
+<script>
+
+const API = "http://localhost:5000/api/pg";
+
+/* TAB SWITCH */
+function showTab(tab){
+    document.getElementById("findSection").style.display = tab==="find" ? "block":"none";
+    document.getElementById("addSection").style.display = tab==="add" ? "block":"none";
+
+    document.getElementById("findBtn").classList.toggle("active-tab", tab==="find");
+    document.getElementById("addBtn").classList.toggle("active-tab", tab==="add");
+}
+
+/* SEARCH */
+async function searchPG(){
+
+    console.log("SEARCH CLICKED");
+
+    const city = document.getElementById("city").value || "";
+    const location = document.getElementById("location").value || "";
+    const price = document.getElementById("price").value || "";
+
+    try {
+        const res = await fetch(`${API}?city=${city}&location=${location}&price=${price}`);
+        const data = await res.json();
+
+        renderPG(data);
+
+    } catch (err) {
+        console.error(err);
+        alert("Backend not running!");
+    }
+}
+
+/* RENDER */
+function renderPG(list){
+
+    const container = document.getElementById("pgResults");
+    container.innerHTML = "";
+
+    if(!list.length){
+        container.innerHTML = "<p>No PG Found 😢</p>";
+        return;
+    }
+
+    list.forEach(pg => {
+        container.innerHTML += `
+            <div class="pg-card">
+                <img src="${pg.image}">
+                <div class="pg-info">
+                    <h3>${pg.name}</h3>
+                    <p>${pg.city} • ${pg.location}</p>
+                    <p>₹${pg.price}</p>
+                    <p>📞 ${pg.contact}</p>
+                </div>
+            </div>
+        `;
+    });
+}
+
+/* ADD PG */
+async function addPG(){
+
+    const pg = {
+        name: document.getElementById("pgName").value,
+        city: document.getElementById("pgCity").value,
+        location: document.getElementById("pgLocation").value,
+        price: document.getElementById("pgPrice").value,
+        contact: document.getElementById("pgContact").value,
+        image: document.getElementById("pgImage").value
+    };
+
+    await fetch(API, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body: JSON.stringify(pg)
+    });
+
+    alert("PG Added 🎉");
+
+    showTab("find");
+    searchPG();
+}
+
+/* LOAD */
+window.onload = searchPG;
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Fira+Code&display=swap');
+
+:root {
+    --primary: #5c54e5;
+    --accent: #00f2fe;
+    --bg-left: #08091a; 
+    --glass: rgba(255, 255, 255, 0.04); 
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    overflow: hidden; /* Lock main body */
+    background: var(--bg-left);
+    font-family: 'Inter', sans-serif;
+    color: #e0e0e0;
+}
+
+/* --- LEFT SIDE: THE ENGINE --- */
+.left-pane {
+    width: 55%;
+    height: 100vh;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-right: 1px solid var(--border);
+    z-index: 10;
+}
+
+.scroll-content {
+    flex: 1;
+    overflow-y: auto; /* Independent scroll */
+    padding-right: 15px;
+    margin-top: 20px;
+}
+
+/* Custom Scrollbar */
+.scroll-content::-webkit-scrollbar { width: 5px; }
+.scroll-content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+/* --- RIGHT SIDE: THE IMAGE --- */
+.right-pane {
+    width: 45%;
+    height: 100vh;
+    background: url('https://us.images.westend61.de/0001064804pw/young-college-student-roommates-studying-and-hanging-out-in-sunny-apartment-living-room-HOXF04048.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+/* Smooth Dark Fade */
+.right-pane::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, var(--bg-left) 0%, transparent 100%);
+}
+
+/* --- UI COMPONENTS --- */
+.transparent-block {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    background: linear-gradient(to right, #fff, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h1 span { font-weight: 300; }
+
+.subtitle {
+    color: #888;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.full-width { grid-column: span 2; }
+
+label { font-size: 0.75rem; color: #aaa; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; display: block; }
+
+input, textarea {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    color: white;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+textarea { height: 100px; resize: none; }
+
+.action-buttons { display: flex; gap: 15px; margin-top: 20px; }
+
+button {
+    flex: 1;
+    padding: 16px;
+    border-radius: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.generate-btn { background: var(--primary); color: white; box-shadow: 0 10px 20px rgba(92, 84, 229, 0.3); }
+.secondary-btn { background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid var(--border); }
+
+.generate-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(92, 84, 229, 0.5); }
+
+/* --- TERMINAL & DOWNLOAD --- */
+.output-section {
+    background: #050505;
+    border-radius: 16px;
+    border: 1px solid #333;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.terminal-header { background: #1a1a1a; padding: 12px; display: flex; align-items: center; gap: 8px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+
+pre {
+    padding: 20px;
+    color: var(--accent);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.95rem; /* Increased size */
+    height: 280px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+.download-btn {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 20px;
+    border-radius: 14px;
+    font-size: 1.1rem; /* Superb large font */
+    font-weight: 600;
+    transition: all 0.4s ease;
+}
+
+.download-btn:hover { 
+    background: rgba(0, 242, 254, 0.1); 
+    border-color: #fff;
+    color: #fff;
+    transform: translateY(-2px); 
+}

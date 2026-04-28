@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StayMatch | Conflict Risk Predictor</title>
+    <link rel="stylesheet" href="conflict.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="glass-shell">
+        
+        <aside class="control-island">
+            <header class="matching-header">
+                <div class="back-link" onclick="window.location.href='dashboard.html'">← Dashboard</div>
+                <h1>Conflict Risk <span>Predictor</span></h1>
+                <p>Detect lifestyle friction before the lease is signed.</p>
+            </header>
+
+            <div class="input-card">
+                <div class="trait">
+                    <label>Sleep Schedule <span id="val-sleep">5</span></label>
+                    <input type="range" id="sleep" min="1" max="10" value="5" oninput="updateVal('sleep')">
+                </div>
+                <div class="trait">
+                    <label>Cleanliness <span id="val-clean">5</span></label>
+                    <input type="range" id="clean" min="1" max="10" value="5" oninput="updateVal('clean')">
+                </div>
+                <div class="trait">
+                    <label>Noise Tolerance <span id="val-noise">5</span></label>
+                    <input type="range" id="noise" min="1" max="10" value="5" oninput="updateVal('noise')">
+                </div>
+                <div class="trait">
+                    <label>Study Habits <span id="val-study">5</span></label>
+                    <input type="range" id="study" min="1" max="10" value="5" oninput="updateVal('study')">
+                </div>
+                <div class="trait">
+                    <label>Social Behaviour <span id="val-social">5</span></label>
+                    <input type="range" id="social" min="1" max="10" value="5" oninput="updateVal('social')">
+                </div>
+            </div>
+            
+            <button class="sync-btn" onclick="predictConflict()">Run Risk Analysis</button>
+        </aside>
+
+        <section class="results-island">
+            <div class="analysis-header">
+                <h2>Potential Friction Points</h2>
+                <span id="risk-count" class="counter">0 Profiles Scanned</span>
+            </div>
+            
+            <div id="conflict-results" class="results-container">
+                <div class="placeholder-msg">Set your lifestyle sliders to begin detection...</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="conflict.js" defer></script>
+</body>
+</html>

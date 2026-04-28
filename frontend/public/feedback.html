@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Compatibility Feedback</title>
+</head>
+
+<body>
+
+<h2>Compatibility Feedback</h2>
+
+<input id="user" placeholder="Your Name">
+
+<input id="roommate" placeholder="Roommate Name">
+
+<select id="rating">
+<option value="1">1 ⭐</option>
+<option value="2">2 ⭐</option>
+<option value="3">3 ⭐</option>
+<option value="4">4 ⭐</option>
+<option value="5">5 ⭐</option>
+</select>
+
+<textarea id="comment" placeholder="Write feedback"></textarea>
+
+<button onclick="submitFeedback()">Submit Feedback</button>
+
+<script>
+
+async function submitFeedback(){
+
+const data = {
+user:document.getElementById("user").value,
+roommate:document.getElementById("roommate").value,
+rating:document.getElementById("rating").value,
+comment:document.getElementById("comment").value
+};
+
+await fetch("/api/feedback",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+});
+
+alert("Feedback submitted!");
+
+}
+
+</script>
+
+</body>
+</html>

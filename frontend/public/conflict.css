@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+    /* Colors sampled from the warm, modern background */
+    --primary: #6c5ce7;
+    --accent: #a29bfe;
+    --high: #ff4757;
+    --med: #ffa502;
+    --low: #2ed573;
+    /* Ultra-clear frosted glass */
+    --glass: rgba(15, 18, 25, 0.45);
+    --border: rgba(255, 255, 255, 0.12);
+}
+
+body {
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+    color: white;
+    min-height: 100vh;
+    /* Clean transition overlay for text readability */
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                url('https://th.bing.com/th/id/R.621245d049cf112034171aa246b5fe61?rik=uDAol3cZSQ5rQQ&riu=http%3a%2f%2fpassionresources.com%2fcdn%2fshop%2fcollections%2fStudy_Guide_Tile_f40d7a5b-2150-4ec2-8b3f-d20a5f45aafc.jpg%3fv%3d1742347667&ehk=Loij06G4u0Y51eoz4rYGYrMXLqK4IBWXQUAWhF5rD2A%3d&risl=&pid=ImgRaw&r=0') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glass-shell {
+    width: 92%;
+    max-width: 1250px;
+    background: var(--glass);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    padding: 50px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+}
+
+.main-layout { 
+    display: grid; 
+    grid-template-columns: 360px 1fr; 
+    gap: 60px; 
+}
+
+/* Pro-Level Risk Cards */
+.risk-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    border-radius: 20px; 
+    padding: 25px;
+    margin-bottom: 20px; 
+    border: 1px solid var(--border);
+    border-left: 8px solid transparent;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.risk-card:hover { 
+    transform: translateX(12px) scale(1.02); 
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.high-risk { border-left-color: var(--high); background: rgba(255, 71, 87, 0.03); }
+.med-risk { border-left-color: var(--med); background: rgba(255, 165, 2, 0.03); }
+.low-risk { border-left-color: var(--low); background: rgba(46, 213, 115, 0.03); }
+
+/* Neural Tag Design */
+.risk-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin: 8px 8px 0 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.high-risk .risk-tag { color: var(--high); background: rgba(255, 71, 87, 0.15); border: 1px solid rgba(255, 71, 87, 0.3); }
+.med-risk .risk-tag { color: var(--med); background: rgba(255, 165, 2, 0.15); border: 1px solid rgba(255, 165, 2, 0.3); }
+.low-risk .risk-tag { color: var(--low); background: rgba(46, 213, 115, 0.15); border: 1px solid rgba(46, 213, 115, 0.3); }
+
+/* The Action Button */
+.sync-btn {
+    width: 100%; 
+    padding: 20px; 
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--primary), #4834d4);
+    color: white; 
+    border: none; 
+    font-weight: 600; 
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sync-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(108, 92, 231, 0.5);
+    filter: brightness(1.1);
+}
+
+/* Animated Scrollbar for Results */
+.results-container::-webkit-scrollbar { width: 6px; }
+.results-container::-webkit-scrollbar-track { background: transparent; }
+.results-container::-webkit-scrollbar-thumb { 
+    background: var(--border); 
+    border-radius: 10px; 
+}
